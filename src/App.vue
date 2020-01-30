@@ -25,42 +25,65 @@
               :key="element.name"
             >{{ element.name }} {{ index }}</div>
           </transition-group>
+          <div v-if="!list2.length">No players on the bench</div>
         </draggable>
       </div>
+    </div>
+    <div class="mt-3">
+      <h3 class="text-center">Bench timer</h3>
+      <bench-timer v-for="player of benchedPlayers" :key="player"></bench-timer>
     </div>
   </div>
 </template>
 
 <script>
 import draggable from "vuedraggable";
+import BenchTimer from "./components/BenchTimer";
 
 export default {
   name: "app",
   components: {
-    draggable
+    draggable,
+    BenchTimer
   },
-  created: () => {},
   data() {
     return {
       list1: [
         { name: "John", id: 1 },
         { name: "Joao", id: 2 },
         { name: "Jean", id: 3 },
-        { name: "Gerard", id: 4 }
-      ],
-      list2: [
+        { name: "Gerard", id: 4 },
         { name: "Juan", id: 5 },
         { name: "Edgard", id: 6 },
         { name: "Johnson", id: 7 }
-      ]
+      ],
+      list2: [],
+      benchedPlayers: []
     };
   },
   methods: {
     benchLog: function(evt) {
       window.console.log("bench", evt);
+      if ("added" in evt) {
+        // add something to an array?
+        // this.triggerTimer(evt);
+        this.benchedPlayers.push(evt.added.element.id);
+      }
     },
     fieldLog: function(evt) {
       window.console.log("field", evt);
+    },
+    triggerTimer: function(evt) {
+      const user = evt.added.element.id;
+      let playerTimer = setInterval(() => {
+        if (this._data[user]) {
+          this._data[user] = this._data[user] + 1;
+        } else {
+          this._data[user] = 1;
+        }
+        console.log(this._data);
+      }, 1000);
+      // this.timerTracker[user] = playerTimer;
     }
   }
 };
@@ -81,7 +104,7 @@ export default {
   background: #c8ebfb;
 }
 .list-group {
-  min-height: 20px;
+  min-height: 50vh;
 }
 .list-group-item {
   cursor: move;
