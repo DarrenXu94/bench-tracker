@@ -1,5 +1,5 @@
 <template>
-  <div class="col-4 text-center d-flex justify-content-between list-group-item">
+  <div class="col-11 col-md-4 text-center d-flex justify-content-between list-group-item">
     <span>{{data.name}}</span>
     <span>Time on bench: {{pad(parseInt(counter/60))}}:{{pad(counter % 60)}}</span>
   </div>
