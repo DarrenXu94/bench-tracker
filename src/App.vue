@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-center mb-3">Bench Tracker</h1>
+    <h1 style="font-size:5vw;" class="text-center mb-3">Bench Tracker</h1>
     <div class="d-flex justify-content-center">
       <div class="col-6 col-sm-4">
         <h3>Field</h3>
@@ -29,7 +29,7 @@
         </draggable>
       </div>
     </div>
-    <div class="mt-3">
+    <div class="mt-3 mb-3">
       <h3 class="text-center">Bench timer</h3>
       <div class="d-flex justify-content-center flex-column align-items-center">
         <bench-timer v-for="player of benchedPlayers" :key="player.id" :data="player"></bench-timer>
